@@ -24,4 +24,4 @@
 
 ## 03 - Nest JS Fundamentals II
 
-- [Link al resumen de la Clase](./XpertReadmes/NestJS-03.md)
+- [Link al resumen de la Clase](./readmes/NestJS-03.md)
