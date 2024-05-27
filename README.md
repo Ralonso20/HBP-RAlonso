@@ -25,3 +25,7 @@
 ## 03 - Nest JS Fundamentals II
 
 - [Link al resumen de la Clase](./readmes/NestJS-03.md)
+
+## 04 - Nest JS Routing
+
+- [Link al resumen de la Clase](./readmes/NestJS-04.md)
