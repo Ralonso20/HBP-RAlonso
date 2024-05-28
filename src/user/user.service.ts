@@ -25,4 +25,11 @@ export class UserService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  pag(page, limit) {
+    return {
+      page,
+      limit,
+    };
+  }
 }
