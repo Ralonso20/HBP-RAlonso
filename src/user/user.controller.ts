@@ -18,7 +18,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/guards/auth/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder/date-adder.interceptor';
-import { request } from 'http';
 
 @Controller('users')
 export class UserController {
