@@ -29,3 +29,7 @@
 ## 04 - Nest JS Routing
 
 - [Link al resumen de la Clase](./readmes/NestJS-04.md)
+
+## 05 - Nest JS y TypeORM
+
+- [Correcion relacion entidades](./entities/class_5_typeorm_relations_correction.md)
