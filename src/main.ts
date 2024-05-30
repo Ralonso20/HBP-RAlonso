@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { loggerGlobal } from './middleware/logger/logger.middleware';
-
+import 'reflect-metadata';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(loggerGlobal);
