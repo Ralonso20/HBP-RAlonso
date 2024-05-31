@@ -1,5 +1,5 @@
-// import { Category } from 'src/categories/entities/category.entity';
-// import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
+import { Category } from 'src/categories/entities/category.entity';
+import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
 import {
   ManyToOne,
   Column,
@@ -31,10 +31,10 @@ export class Product {
   })
   imgUrl: string;
 
-  //   @ManyToOne(() => Category, (category) => category.products)
-  //   category: Category;
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 
-  //   @ManyToMany(() => OrderDetail, (orderDetail) => orderDetail.products)
-  //   @JoinTable()
-  //   orderDetails: OrderDetail[];
+  @ManyToMany(() => OrderDetail, (orderDetail) => orderDetail.products)
+  @JoinTable()
+  orderDetails: OrderDetail[];
 }

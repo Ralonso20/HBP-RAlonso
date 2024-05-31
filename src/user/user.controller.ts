@@ -27,10 +27,8 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(DateAdderInterceptor)
   create(@Body() createUserDto: CreateUserDto, @Req() request) {
-    console.log(createUserDto);
     const user = { ...createUserDto, createdAt: request.date };
-    console.log(user);
-    return this.userService.create(createUserDto);
+    return this.userService.create(user);
   }
 
   @Get()

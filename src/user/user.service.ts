@@ -45,6 +45,10 @@ export class UserService {
     return this.usersRepository.delete(id);
   }
 
+  async findOneBy(id: string) {
+    return this.usersRepository.findOneBy({ id });
+  }
+
   pag(page, limit) {
     return {
       page,

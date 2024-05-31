@@ -39,4 +39,16 @@ export class ProductsService {
     await this.productRepository.delete(id);
     return { id };
   }
+
+  async buyProduct(id: string) {
+    const product = await this.productRepository.findOneBy({ id });
+    if (product.stock === 0) {
+      throw new Error('Out of stock');
+    }
+    await this.productRepository.update(id, {
+      stock: product.stock - 1,
+    });
+    console.log('Product bought successfully');
+    return product.price;
+  }
 }

@@ -1,4 +1,4 @@
-// import { Order } from 'src/orders/entities/order.entity';
+import { Order } from 'src/orders/entities/order.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -29,8 +29,8 @@ export class User {
   @Column({ nullable: true })
   city: string;
 
-  //   @OneToMany(() => Order, (order) => order.user)
-  //   orders: Order[];
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   @Column()
   createdAt: string;
