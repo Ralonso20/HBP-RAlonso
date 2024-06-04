@@ -33,7 +33,11 @@
 ## 05 - Nest JS y TypeORM
 
 - [Correcion relacion entidades](./entities/class_5_typeorm_relations_correction.md)
-- [Link al resumen de la Clase](./readmes/NestJS-05.md)
+- [Link al resumen de la Clase](./readmes/NestJS-05.md) (Con migraciones)
 - [Config Module](https://docs.nestjs.com/techniques/configuration)
 - [Configuracion TypeOrm nestjs](https://docs.nestjs.com/techniques/database)
 - [Instalacion TypeOrm y Documentacion](https://typeorm.io/)
+
+## 06 - Nest JS Pipes
+
+- [Link al resumen de la Clase](./readmes/NestJS-06.md)
