@@ -10,11 +10,12 @@ import {
   HttpStatus,
   Put,
   Query,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-
+import { IsUUID } from 'class-validator';
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
@@ -33,8 +34,11 @@ export class ProductsController {
 
   @Get(':id')
   @HttpCode(200)
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     const product = await this.productsService.findOne(id);
+    if (!IsUUID(4, { each: true })) {
+      throw new HttpException('Invalid UUID', HttpStatus.BAD_REQUEST);
+    }
     if (!product) {
       throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
     }
