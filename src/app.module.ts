@@ -11,6 +11,8 @@ import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderDetailsModule } from './order-details/order-details.module';
 import { SeedsModule } from './seeds/seeds.module';
+import { CloudinaryService } from './services/cloudinary/cloudinary.service';
+import { FileUploadModule } from './file-upload/file-upload.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,8 +31,9 @@ import { SeedsModule } from './seeds/seeds.module';
     OrdersModule,
     OrderDetailsModule,
     SeedsModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule {}

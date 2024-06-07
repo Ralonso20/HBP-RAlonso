@@ -4,12 +4,15 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
+import { FileUploadService } from 'src/file-upload/file-upload.service';
+import { UploadFileDto } from 'src/file-upload/dto/upload-file.dto';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+    private readonly fileUploadService: FileUploadService,
   ) {}
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const newProduct = this.productRepository.create(createProductDto);
@@ -50,5 +53,17 @@ export class ProductsService {
     });
     console.log('Product bought successfully');
     return product.price;
+  }
+
+  async uploadFile(file: UploadFileDto, id: string) {
+    const url = await this.fileUploadService.uploadFile({
+      fieldname: file.fieldname,
+      buffer: file.buffer,
+      originalname: file.originalname,
+      mimetype: file.mimetype,
+      size: file.size,
+    });
+    await this.productRepository.update(id, { imgUrl: url });
+    return { imgUrl: url };
   }
 }

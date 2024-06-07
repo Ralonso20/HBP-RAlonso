@@ -11,14 +11,22 @@ import {
   Put,
   Query,
   ParseUUIDPipe,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { IsUUID } from 'class-validator';
+import { FileUploadService } from 'src/file-upload/file-upload.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImageUploadPipe } from 'src/pipes/image-upload/image-upload.pipe';
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly fileUploadService: FileUploadService,
+  ) {}
 
   @Post()
   @HttpCode(201)
@@ -72,5 +80,21 @@ export class ProductsController {
       throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
     }
     return this.productsService.remove(id);
+  }
+
+  @Post(':id/upload')
+  @HttpCode(200)
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(
+    @Param('id') id: string,
+    @UploadedFile(new ImageUploadPipe()) file: Express.Multer.File,
+  ) {
+    return this.productsService.uploadFile(file, id);
+  }
+
+  @Get(':id/image')
+  @HttpCode(200)
+  async getImage(@Param('id') id: string) {
+    return this.fileUploadService.getUrl(id);
   }
 }
