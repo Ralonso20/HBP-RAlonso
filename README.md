@@ -41,3 +41,7 @@
 ## 06 - Nest JS Pipes
 
 - [Link al resumen de la Clase](./readmes/NestJS-06.md)
+
+## 07 - Nest JS File Upload
+
+- [Link al resumen de la Clase](./readmes/NestJS-07.md)
