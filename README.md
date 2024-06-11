@@ -45,3 +45,7 @@
 ## 07 - Nest JS File Upload
 
 - [Link al resumen de la Clase](./readmes/NestJS-07.md)
+
+## 08 - Nest JS Authentication I
+
+- [Link al resumen de la Clase](./readmes/NestJS-08.md)
