@@ -49,6 +49,10 @@ export class UserService {
     return this.usersRepository.findOneBy({ id });
   }
 
+  async findByEmail(email: string) {
+    return this.usersRepository.findOne({ where: { email: email } });
+  }
+
   pag(page, limit) {
     return {
       page,

@@ -1,37 +1,41 @@
 import {
   CanActivate,
   ExecutionContext,
-  HttpException,
-  HttpStatus,
   Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { Request } from 'express';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {}
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
-
-    const authHeader = request.header('Authorization');
-
-    if (!authHeader) {
-      throw new HttpException('Not authorized', HttpStatus.UNAUTHORIZED);
+    const token = this.extractTokenFromHeader(request);
+    if (!token) {
+      throw new UnauthorizedException('Token not found');
     }
 
-    const authFormat = authHeader.split(' ');
-    console.log(authHeader);
-    console.log(authFormat);
+    try {
+      const payload = await this.jwtService.verifyAsync(token, {
+        secret: this.configService.get<string>('JWT_SECRET'),
+      });
+      console.log('Payload', payload);
+      request['user'] = payload;
+    } catch {
+      throw new UnauthorizedException('Invalid token');
+    }
 
-    const credentialsBase64 = authFormat[1];
-    const decodedCredentials = Buffer.from(
-      credentialsBase64,
-      'base64',
-    ).toString('utf-8');
-    console.log(decodedCredentials);
-    const [username, password] = decodedCredentials.split(':');
     return true;
+  }
+
+  private extractTokenFromHeader(request: Request): string | undefined {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
   }
 }
