@@ -24,8 +24,7 @@ export class AuthService {
       user.password,
     );
 
-    console.log('SignInUserPassword: ', signInUser.password);
-    console.log('UserPassword', user.password);
+    console.log(isPasswordMatching);
 
     if (!isPasswordMatching) {
       throw new HttpException(
