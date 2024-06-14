@@ -18,10 +18,20 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/guards/auth/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder/date-adder.interceptor';
+import { Roles } from 'src/decorator/roles/roles.decorator';
+import { Role } from './enum/role.enum';
+import { RolesGuard } from 'src/guards/roles/roles.guard';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('admin')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
+  getAdmin() {
+    return 'This route is for admin only';
+  }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)

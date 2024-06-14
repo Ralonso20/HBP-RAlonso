@@ -24,6 +24,9 @@ export class AuthService {
       user.password,
     );
 
+    console.log('SignInUserPassword: ', signInUser.password);
+    console.log('UserPassword', user.password);
+
     if (!isPasswordMatching) {
       throw new HttpException(
         'Wrong credentials provided',
@@ -49,6 +52,7 @@ export class AuthService {
     const payload = {
       id: user.id,
       email: user.email,
+      roles: user.administrator,
     };
 
     return this.jwtService.signAsync(payload);

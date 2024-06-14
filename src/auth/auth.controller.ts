@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Post,
   Req,
@@ -26,5 +27,11 @@ export class AuthController {
   signUp(@Body() signUpUser: SignUpAuthDto, @Req() request) {
     const user = { ...signUpUser, createdAt: request.date };
     return this.authService.signUp(user);
+  }
+
+  @Get('auth0/protected')
+  getAuth0Protected(@Req() request) {
+    console.log(JSON.stringify(request.oidc.idToken));
+    return JSON.stringify(request.oidc.user);
   }
 }
