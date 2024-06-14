@@ -24,6 +24,8 @@ export class AuthService {
       user.password,
     );
 
+    console.log(isPasswordMatching);
+
     if (!isPasswordMatching) {
       throw new HttpException(
         'Wrong credentials provided',
