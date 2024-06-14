@@ -49,3 +49,7 @@
 ## 08 - Nest JS Authentication I
 
 - [Link al resumen de la Clase](./readmes/NestJS-08.md)
+
+## 09 - Nest JS Authentication II
+
+- [Link al resumen de la Clase](readmes/NestJS-09.md)
