@@ -36,6 +36,6 @@ export class User {
   @Column()
   createdAt: string;
 
-  @Column({ type: 'enum', enum: Role, default: Role.User })
-  administrator: Role;
+  @Column({ default: Role.User })
+  administrator: string;
 }

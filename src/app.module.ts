@@ -5,7 +5,10 @@ import { UserModule } from './user/user.module';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { postgresDataSourceConfig } from './config/data-source';
+import {
+  postgresDataSourceConfig,
+  sqliteDataSourceConfig,
+} from './config/data-source';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
@@ -16,14 +19,22 @@ import { FileUploadModule } from './file-upload/file-upload.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: ['.env.development.local', '.env'],
       isGlobal: true,
-      load: [postgresDataSourceConfig],
-      envFilePath: ['.env', '.env.development.local'],
+      load: [
+        postgresDataSourceConfig,
+        sqliteDataSourceConfig,
+        () => ({
+          enviroment: process.env.environment || 'TEST',
+        }),
+      ],
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
-        configService.get('postgres'),
+        configService.get('enviroment') === 'TEST'
+          ? configService.get('sqlite')
+          : configService.get('postgres'),
     }),
     UserModule,
     ProductsModule,
