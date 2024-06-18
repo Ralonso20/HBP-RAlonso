@@ -51,4 +51,8 @@ export class SignUpAuthDto {
   @IsString()
   @IsOptional()
   createdAt: string;
+
+  constructor(partial: Partial<SignUpAuthDto>) {
+    Object.assign(this, partial);
+  }
 }

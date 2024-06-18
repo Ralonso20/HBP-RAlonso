@@ -43,8 +43,7 @@ export class AuthService {
     }
 
     signUpUser.password = await hash(signUpUser.password, 10);
-    await this.userService.create(signUpUser);
-    return new UserResponseDto(signUpUser);
+    return this.userService.create(signUpUser);
   }
 
   private async createToken(user: User) {
