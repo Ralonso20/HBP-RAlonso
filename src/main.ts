@@ -6,6 +6,7 @@ import { CategoriesSeed } from './seeds/categories/categories.seed';
 import { ProductsSeed } from './seeds/products/products.seed';
 import { auth } from 'express-openid-connect';
 import { auth0Config } from './config/auth0-config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(loggerGlobal);
@@ -14,6 +15,15 @@ async function bootstrap() {
       ...auth0Config,
     }),
   );
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Nest demo')
+    .setDescription('Demo for M4 backend')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('api', app, document);
   const categoriesSeed = app.get(CategoriesSeed);
   await categoriesSeed.seed();
   console.log('La inserción de categorías ha terminado.');

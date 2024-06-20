@@ -21,7 +21,10 @@ import { DateAdderInterceptor } from 'src/interceptors/date-adder/date-adder.int
 import { Roles } from 'src/decorator/roles/roles.decorator';
 import { Role } from './enum/role.enum';
 import { RolesGuard } from 'src/guards/roles/roles.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
