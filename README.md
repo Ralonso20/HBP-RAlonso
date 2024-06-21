@@ -57,3 +57,7 @@
 ## 10 - Nest JS Testing
 
 - [Link al resumen de la Clase](./readmes/NestJS-10.md)
+
+## 11 - Nest JS Open API
+
+- [Link al resumen de la Clase](./readmes/NestJS-11.md)
