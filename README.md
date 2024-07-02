@@ -1,5 +1,7 @@
 # Cohorte PT19a - Modulo 4 - Backend
 
+**ACLARACIÓN**: Los ejemplos de cada clase van a estar en sus respectivas ramas, por ejemplo la rama **class-1-backend-architecture** contendra el codigo visto en esa clase.
+
 ## TypeScript
 
 - [TypeScript - Documentación Oficial](https://www.typescriptlang.org/)
@@ -70,3 +72,8 @@
 
 - [Link al resumen de la Clase](./readmes/NestJS-13.md)
 - [Render deploy action](https://github.com/marketplace/actions/render-deploy-action)
+
+## 14 - JavaScript Advance III
+
+- [Link al resumen de la Clase](./readmes/NestJS-14.md)
+- Ejemplos en la carpeta JavaScriptAdvance
